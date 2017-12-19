@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>task4</title>
+	<style>
+        li{
+            display:inline-block;
+            background-color: #cd4a48;
+            color: #f3f6f7;
+            font-size:20px;
+            text-align:center;
+            padding:5px;
+            margin:5px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+	<input type="text" id="inputnum" name="number">
+	<button id="leftin">左侧入</button>
+    <button id="rightin">右侧入</button>
+    <button id="leftout">左侧出</button>
+    <button id="rightout">右侧出</button>
+    <button id="paixu">排序</button>
+    <ul id="num"></ul>
+ <script type="text/javascript">
+ 	var inputnum  = document.getElementById('inputnum');
+ 	var leftin = document.getElementById('leftin');
+ 	var rightout = document.getElementById('rightout');
+ 	var leftout = document.getElementById('leftout');
+ 	var rightin = document.getElementById('rightin');
+ 	var num = document.getElementById('num');
+ 	var paixu = document.getElementById('paixu');
+
+
+   /*  function insert(direction) {
+    	var oLi = document.createElement('li');
+    	oLi.innerHTML= inputnum.value;
+    	if(direction === "left"){
+    		num.insertBefore(oLi,num.firstChild);
+    	}else if(direction === "right"){
+    		num.appendChild(oLi);
+    	}
+    }
+
+    leftin.onclick=function(){
+    	insert("left");
+    }*/
+    
+
+    rightin.onclick=function(){
+    	var oLi=document.createElement('li');
+ 	     oLi.innerHTML=inputnum.value;
+ 	     num.appendChild(oLi);
+    }
+    leftin.onclick=function(){
+    	var lRi=document.createElement('li');
+    	lRi.innerHTML=inputnum.value;
+    	num.insertBefore(lRi,num.firstChild);
+
+    }
+   /* function del(node,direction) {
+    	if(direction==="left"){
+    		num.removeChild(num.firstChild);
+    	}
+    }
+    leftout.onclick=function(){
+    	del(-1,"left");
+    }*/
+    /*function delet(direction) {
+    	if(direction ==="left"){
+    	    alert("删除数据："+num.firstChild.innerHTML+"!");
+    		num.removeChild(num.firstChild);
+        }
+    	}else if(direction ==="right"){
+    		num.removeChild(num.lastChild);
+    	}
+    }
+
+    leftout.onclick=function(){
+    	delet("left");
+    }
+    rightout.onclick=function(){
+    	delet("right");
+    }*/
+    leftout.onclick=function(){
+       if(num.childNodes.length<=0){
+                alert("不存在元素可以删除");
+                return false;
+            } 
+    }
+
+//冒泡排序
+function swap(items,firstIndex,secondIndex) {
+  var temp;
+  temp=items[firstIndex];
+  items[firstIndex]=items[secondIndex];
+  items[secondIndex]=temp;
+}
+function bubbleSort(items){
+  var i,j,stop,len=items.length;
+  for(i=0;i<len;i++){
+    for(j=0,stop=len-i;j<stop;j++){
+      if(items[j]>items[j+1]){
+        swap(items,j,j+1);
+      }
+    }
+  }
+  return items;
+}
+
+   function butHandle() {
+   	   var list= new Array();
+   	   var j=0;
+   	   for(var i=0;i<num.childNodes.length;i++){
+   	   	list[j]=num.childNodes[i].innerHTML;
+   	   	j++;
+   	   }
+ 		bubbleSort(list);
+ 		for(var m=0;m<num.childNodes.length;m++)
+           {
+            num.childNodes[m].innerHTML = list[m];
+           }
+		 
+   }
+  //关联事件
+ 	paixu.onclick=function(){
+ 		butHandle();
+ 	}
+ </script>
+</body>
+</html>
